@@ -1,0 +1,25 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply from: "$rootDir/dependencies.gradle"
+
+android {
+    compileSdkVersion versions.compileSdk
+    defaultConfig {
+        applicationId "com.skydoves.powerspinnerdemo"
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.compileSdk
+        versionCode versions.versionCode
+        versionName versions.versionName
+    }
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+dependencies {
+    implementation "com.google.android.material:material:$versions.googleMaterial"
+    implementation "androidx.preference:preference-ktx:$versions.preference"
+    implementation project(path:":powerspinner")
+}
+
+apply from: "$rootDir/spotless.gradle"

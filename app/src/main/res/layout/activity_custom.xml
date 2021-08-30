@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:padding="32dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/question_1"
+            android:textColor="@color/white_87" />
+
+        <com.skydoves.powerspinner.PowerSpinnerView
+            android:id="@+id/spinnerView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/rectangle"
+            android:foreground="?attr/selectableItemBackground"
+            android:hint="Select a question"
+            android:padding="10dp"
+            android:textColor="@color/white_93"
+            android:textColorHint="@color/white_70"
+            android:textSize="14sp"
+            app:spinner_arrow_gravity="end"
+            app:spinner_arrow_padding="8dp"
+            app:spinner_divider_color="@color/white_70"
+            app:spinner_divider_show="true"
+            app:spinner_divider_size="1dp"
+            app:spinner_popup_animation="normal"
+            app:spinner_popup_elevation="14dp"
+            tools:ignore="HardcodedText,UnusedAttribute" />
+
+    </LinearLayout>
+</RelativeLayout>
