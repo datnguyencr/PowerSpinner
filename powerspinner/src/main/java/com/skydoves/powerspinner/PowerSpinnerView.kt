@@ -45,17 +45,13 @@ class PowerSpinnerView : AppCompatTextView, LifecycleObserver {
 
     /** Main body view for composing the Spinner popup. */
     private val binding: LayoutBodyPowerSpinnerLibraryBinding =
-        LayoutBodyPowerSpinnerLibraryBinding.inflate(LayoutInflater.from(context), null, false)
+            LayoutBodyPowerSpinnerLibraryBinding.inflate(LayoutInflater.from(context), null, false)
 
     /** PopupWindow for creating the spinner. */
     private var spinnerWindow: PopupWindow? = null
 
     /** Spinner is showing or not. */
     var isShowing: Boolean = false
-        private set
-
-    /** An index of the selected item. */
-    var selectedIndex: Int = NO_SELECTED_INDEX
         private set
 
     var arrowAnimate: Boolean = true
@@ -65,7 +61,7 @@ class PowerSpinnerView : AppCompatTextView, LifecycleObserver {
 
     /** A drawable of the arrow. */
     var arrowDrawable: Drawable? =
-        context.contextDrawable(R.drawable.arrow_power_spinner_library)?.mutate()
+            context.contextDrawable(R.drawable.arrow_power_spinner_library)?.mutate()
 
     /** A duration of the debounce for showOrDismiss. */
     var debounceDuration: Long = 150L
@@ -75,25 +71,27 @@ class PowerSpinnerView : AppCompatTextView, LifecycleObserver {
     var disableChangeTextWhenNotified: Boolean = false
 
     var normalTextColor: Int = Color.parseColor("#1C1C1C")
-    var selectTextColor: Int = Color.parseColor("#1C1C1C")
+    var selectTextColor: Int = Color.parseColor("#ffffff")
 
     //    var normalBackgroundColor: Int = Color.parseColor("#ffffff")
 //    var selectBackgroundColor: Int = Color.parseColor("#46A355")
     var normalBackgroundColor: Drawable = resources.getDrawable(R.drawable.normal_background_color)
-    var selectBackgroundColor: Drawable = resources.getDrawable(R.drawable.selected_background_color)
+    var selectBackgroundColor: Drawable =
+            resources.getDrawable(R.drawable.selected_background_color)
 
     /** A backing field of the previously debounce local time. */
     private var previousDebounceTime: Long = 0
     private var adapter = DefaultSpinnerAdapter(
-        normalTextColor = normalTextColor,
-        selectTextColor = selectTextColor,
-        normalBackgroundColor = normalBackgroundColor,
-        selectBackgroundColor = selectBackgroundColor,
-        onItemSelected = {
-            dismiss()
-            onItemSelected?.invoke(it)
-            invalidate()
-        }
+            normalTextColor = normalTextColor,
+            selectTextColor = selectTextColor,
+            normalBackgroundColor = normalBackgroundColor,
+            selectBackgroundColor = selectBackgroundColor,
+            onItemSelected = {
+                text = it.name
+                dismiss()
+                onItemSelected?.invoke(it)
+                invalidate()
+            }
     )
 
     @DrawableRes
@@ -255,9 +253,9 @@ class PowerSpinnerView : AppCompatTextView, LifecycleObserver {
     }
 
     constructor(context: Context, attributeSet: AttributeSet, defStyle: Int) : super(
-        context,
-        attributeSet,
-        defStyle
+            context,
+            attributeSet,
+            defStyle
     ) {
         getAttrs(attributeSet, defStyle)
     }
@@ -273,10 +271,10 @@ class PowerSpinnerView : AppCompatTextView, LifecycleObserver {
 
     private fun getAttrs(attributeSet: AttributeSet, defStyleAttr: Int) {
         val typedArray = context.obtainStyledAttributes(
-            attributeSet,
-            R.styleable.PowerSpinnerView,
-            defStyleAttr,
-            0
+                attributeSet,
+                R.styleable.PowerSpinnerView,
+                defStyleAttr,
+                0
         )
         try {
             setTypeArray(typedArray)
@@ -289,22 +287,22 @@ class PowerSpinnerView : AppCompatTextView, LifecycleObserver {
         a.apply {
             if (hasValue(R.styleable.PowerSpinnerView_spinner_arrow_drawable)) {
                 _arrowResource =
-                    getResourceId(
-                        R.styleable.PowerSpinnerView_spinner_arrow_drawable,
-                        _arrowResource
-                    )
+                        getResourceId(
+                                R.styleable.PowerSpinnerView_spinner_arrow_drawable,
+                                _arrowResource
+                        )
             }
 
             if (hasValue(R.styleable.PowerSpinnerView_spinner_arrow_show)) {
                 _showArrow =
-                    a.getBoolean(R.styleable.PowerSpinnerView_spinner_arrow_show, _showArrow)
+                        a.getBoolean(R.styleable.PowerSpinnerView_spinner_arrow_show, _showArrow)
             }
 
             if (hasValue(R.styleable.PowerSpinnerView_spinner_arrow_gravity)) {
                 _arrowGravity = when (
                     getInteger(
-                        R.styleable.PowerSpinnerView_spinner_arrow_gravity,
-                        _arrowGravity.value
+                            R.styleable.PowerSpinnerView_spinner_arrow_gravity,
+                            _arrowGravity.value
                     )
                 ) {
                     SpinnerGravity.START.value -> SpinnerGravity.START
@@ -317,61 +315,61 @@ class PowerSpinnerView : AppCompatTextView, LifecycleObserver {
 
             if (hasValue(R.styleable.PowerSpinnerView_spinner_arrow_padding)) {
                 _arrowPadding =
-                    getDimensionPixelSize(
-                        R.styleable.PowerSpinnerView_spinner_arrow_padding,
-                        _arrowPadding
-                    )
+                        getDimensionPixelSize(
+                                R.styleable.PowerSpinnerView_spinner_arrow_padding,
+                                _arrowPadding
+                        )
             }
 
             if (hasValue(R.styleable.PowerSpinnerView_spinner_arrow_tint)) {
                 _arrowTint =
-                    getColor(R.styleable.PowerSpinnerView_spinner_arrow_tint, _arrowTint)
+                        getColor(R.styleable.PowerSpinnerView_spinner_arrow_tint, _arrowTint)
             }
 
             if (hasValue(R.styleable.PowerSpinnerView_spinner_arrow_animate)) {
                 arrowAnimate =
-                    getBoolean(R.styleable.PowerSpinnerView_spinner_arrow_animate, arrowAnimate)
+                        getBoolean(R.styleable.PowerSpinnerView_spinner_arrow_animate, arrowAnimate)
             }
 
             if (hasValue(R.styleable.PowerSpinnerView_spinner_arrow_animate_duration)) {
                 arrowAnimationDuration =
-                    getInteger(
-                        R.styleable.PowerSpinnerView_spinner_arrow_animate_duration,
-                        arrowAnimationDuration.toInt()
-                    ).toLong()
+                        getInteger(
+                                R.styleable.PowerSpinnerView_spinner_arrow_animate_duration,
+                                arrowAnimationDuration.toInt()
+                        ).toLong()
             }
 
             if (hasValue(R.styleable.PowerSpinnerView_spinner_divider_show)) {
                 _showDivider =
-                    getBoolean(R.styleable.PowerSpinnerView_spinner_divider_show, _showDivider)
+                        getBoolean(R.styleable.PowerSpinnerView_spinner_divider_show, _showDivider)
             }
 
             if (hasValue(R.styleable.PowerSpinnerView_spinner_divider_size)) {
                 _dividerSize =
-                    getDimensionPixelSize(
-                        R.styleable.PowerSpinnerView_spinner_divider_size,
-                        _dividerSize
-                    )
+                        getDimensionPixelSize(
+                                R.styleable.PowerSpinnerView_spinner_divider_size,
+                                _dividerSize
+                        )
             }
 
             if (hasValue(R.styleable.PowerSpinnerView_spinner_divider_color)) {
                 _dividerColor =
-                    getColor(R.styleable.PowerSpinnerView_spinner_divider_color, _dividerColor)
+                        getColor(R.styleable.PowerSpinnerView_spinner_divider_color, _dividerColor)
             }
 
             if (hasValue(R.styleable.PowerSpinnerView_spinner_popup_background)) {
                 _spinnerPopupBackgroundColor =
-                    getColor(
-                        R.styleable.PowerSpinnerView_spinner_popup_background,
-                        _spinnerPopupBackgroundColor
-                    )
+                        getColor(
+                                R.styleable.PowerSpinnerView_spinner_popup_background,
+                                _spinnerPopupBackgroundColor
+                        )
             }
 
             if (hasValue(R.styleable.PowerSpinnerView_spinner_popup_animation)) {
                 spinnerPopupAnimation = when (
                     getInteger(
-                        R.styleable.PowerSpinnerView_spinner_popup_animation,
-                        spinnerPopupAnimation.value
+                            R.styleable.PowerSpinnerView_spinner_popup_animation,
+                            spinnerPopupAnimation.value
                     )
                 ) {
                     SpinnerAnimation.DROPDOWN.value -> SpinnerAnimation.DROPDOWN
@@ -384,59 +382,59 @@ class PowerSpinnerView : AppCompatTextView, LifecycleObserver {
 
             if (hasValue(R.styleable.PowerSpinnerView_spinner_popup_animation_style)) {
                 spinnerPopupAnimationStyle =
-                    getResourceId(
-                        R.styleable.PowerSpinnerView_spinner_popup_animation_style,
-                        spinnerPopupAnimationStyle
-                    )
+                        getResourceId(
+                                R.styleable.PowerSpinnerView_spinner_popup_animation_style,
+                                spinnerPopupAnimationStyle
+                        )
             }
 
             if (hasValue(R.styleable.PowerSpinnerView_spinner_popup_width)) {
                 spinnerPopupWidth =
-                    getDimensionPixelSize(
-                        R.styleable.PowerSpinnerView_spinner_popup_width,
-                        spinnerPopupWidth
-                    )
+                        getDimensionPixelSize(
+                                R.styleable.PowerSpinnerView_spinner_popup_width,
+                                spinnerPopupWidth
+                        )
             }
 
             if (hasValue(R.styleable.PowerSpinnerView_spinner_popup_height)) {
                 spinnerPopupHeight =
-                    getDimensionPixelSize(
-                        R.styleable.PowerSpinnerView_spinner_popup_height,
-                        spinnerPopupHeight
-                    )
+                        getDimensionPixelSize(
+                                R.styleable.PowerSpinnerView_spinner_popup_height,
+                                spinnerPopupHeight
+                        )
             }
 
             if (hasValue(R.styleable.PowerSpinnerView_spinner_popup_elevation)) {
                 _spinnerPopupElevation =
-                    getDimensionPixelSize(
-                        R.styleable.PowerSpinnerView_spinner_popup_elevation,
-                        _spinnerPopupElevation
-                    )
+                        getDimensionPixelSize(
+                                R.styleable.PowerSpinnerView_spinner_popup_elevation,
+                                _spinnerPopupElevation
+                        )
             }
 
             if (hasValue(R.styleable.PowerSpinnerView_spinner_dismiss_notified_select)) {
                 dismissWhenNotifiedItemSelected =
-                    getBoolean(
-                        R.styleable.PowerSpinnerView_spinner_dismiss_notified_select,
-                        dismissWhenNotifiedItemSelected
-                    )
+                        getBoolean(
+                                R.styleable.PowerSpinnerView_spinner_dismiss_notified_select,
+                                dismissWhenNotifiedItemSelected
+                        )
             }
 
             if (hasValue(R.styleable.PowerSpinnerView_spinner_debounce_duration)) {
                 debounceDuration =
-                    getInteger(
-                        R.styleable.PowerSpinnerView_spinner_debounce_duration,
-                        debounceDuration.toInt()
-                    )
-                        .toLong()
+                        getInteger(
+                                R.styleable.PowerSpinnerView_spinner_debounce_duration,
+                                debounceDuration.toInt()
+                        )
+                                .toLong()
             }
 
             if (hasValue(R.styleable.PowerSpinnerView_spinner_popup_focusable)) {
                 setIsFocusable(
-                    getBoolean(
-                        R.styleable.PowerSpinnerView_spinner_popup_focusable,
-                        false
-                    )
+                        getBoolean(
+                                R.styleable.PowerSpinnerView_spinner_popup_focusable,
+                                false
+                        )
                 )
             }
         }
@@ -451,9 +449,9 @@ class PowerSpinnerView : AppCompatTextView, LifecycleObserver {
     private fun updateSpinnerWindow() {
         post {
             this.spinnerWindow = PopupWindow(
-                this.binding.recyclerView,
-                WindowManager.LayoutParams.MATCH_PARENT,
-                WindowManager.LayoutParams.WRAP_CONTENT
+                    this.binding.recyclerView,
+                    WindowManager.LayoutParams.MATCH_PARENT,
+                    WindowManager.LayoutParams.WRAP_CONTENT
             ).also {
                 it.setBackgroundDrawable(normalBackgroundColor)
                 it.apply {
@@ -461,16 +459,16 @@ class PowerSpinnerView : AppCompatTextView, LifecycleObserver {
                     isOutsideTouchable = true
                     setOnDismissListener { onSpinnerDismissListener?.onDismiss() }
                     setTouchInterceptor(
-                        object : OnTouchListener {
-                            @SuppressLint("ClickableViewAccessibility")
-                            override fun onTouch(view: View, event: MotionEvent): Boolean {
-                                if (event.action == MotionEvent.ACTION_OUTSIDE) {
-                                    spinnerOutsideTouchListener?.onSpinnerOutsideTouch(view, event)
-                                    return true
+                            object : OnTouchListener {
+                                @SuppressLint("ClickableViewAccessibility")
+                                override fun onTouch(view: View, event: MotionEvent): Boolean {
+                                    if (event.action == MotionEvent.ACTION_OUTSIDE) {
+                                        spinnerOutsideTouchListener?.onSpinnerOutsideTouch(view, event)
+                                        return true
+                                    }
+                                    return false
                                 }
-                                return false
                             }
-                        }
                     )
                     elevation = spinnerPopupElevation.toFloat()
                 }
@@ -483,10 +481,10 @@ class PowerSpinnerView : AppCompatTextView, LifecycleObserver {
                     setBackgroundColor(this@PowerSpinnerView.spinnerPopupBackgroundColor)
                 }
                 setPadding(
-                    this.paddingLeft,
-                    this.paddingTop,
-                    this.paddingRight,
-                    this.paddingBottom
+                        this.paddingLeft,
+                        this.paddingTop,
+                        this.paddingRight,
+                        this.paddingBottom
                 )
                 if (this@PowerSpinnerView.showDivider) {
                     val decoration = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
@@ -525,28 +523,28 @@ class PowerSpinnerView : AppCompatTextView, LifecycleObserver {
             }
             when (this.arrowGravity) {
                 SpinnerGravity.START -> setCompoundDrawablesWithIntrinsicBounds(
-                    drawable,
-                    null,
-                    null,
-                    null
+                        drawable,
+                        null,
+                        null,
+                        null
                 )
                 SpinnerGravity.TOP -> setCompoundDrawablesWithIntrinsicBounds(
-                    null,
-                    drawable,
-                    null,
-                    null
+                        null,
+                        drawable,
+                        null,
+                        null
                 )
                 SpinnerGravity.END -> setCompoundDrawablesWithIntrinsicBounds(
-                    null,
-                    null,
-                    drawable,
-                    null
+                        null,
+                        null,
+                        drawable,
+                        null
                 )
                 SpinnerGravity.BOTTOM -> setCompoundDrawablesWithIntrinsicBounds(
-                    null,
-                    null,
-                    null,
-                    drawable
+                        null,
+                        null,
+                        null,
+                        drawable
                 )
             }
         } else {
@@ -561,13 +559,14 @@ class PowerSpinnerView : AppCompatTextView, LifecycleObserver {
     fun getSpinnerBodyView(): ScrollingView = binding.recyclerView
 
     fun setItems(itemList: List<Option>) {
+        text = itemList.firstOrNull { it.selected }?.name
         adapter.setItems(itemList)
     }
 
     @JvmSynthetic
     fun setOnSpinnerOutsideTouchListener(block: (View, MotionEvent) -> Unit) {
         this.spinnerOutsideTouchListener =
-            OnSpinnerOutsideTouchListener { view, event -> block(view, event) }
+                OnSpinnerOutsideTouchListener { view, event -> block(view, event) }
     }
 
     /** sets a [OnSpinnerDismissListener] to the popup using lambda. */
@@ -644,22 +643,6 @@ class PowerSpinnerView : AppCompatTextView, LifecycleObserver {
             this.previousDebounceTime = currentTime
             action()
         }
-    }
-
-    /** notifies to [PowerSpinnerView] of changed information from [PowerSpinnerInterface]. */
-    fun notifyItemSelected(index: Int, option: Option) {
-        this.selectedIndex = index
-        if (!disableChangeTextWhenNotified) {
-            this.text = option.name
-        }
-        if (this.dismissWhenNotifiedItemSelected) {
-            dismiss()
-        }
-    }
-
-    /** clears a selected item. */
-    fun clearSelectedItem() {
-        notifyItemSelected(NO_SELECTED_INDEX, Option(""))
     }
 
     /** animates the arrow rotation. */

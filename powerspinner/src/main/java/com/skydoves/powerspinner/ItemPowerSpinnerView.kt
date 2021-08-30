@@ -42,9 +42,10 @@ class ItemPowerSpinnerView : LinearLayoutCompat {
         }
         binding.itemDefaultText.text = item.name
         binding.itemDefaultText.setTextColor(
-                if (isSelected) selectTextColor else normalTextColor
+                if (item.selected) selectTextColor else normalTextColor
         )
-        binding.vLayout.background = if (item.selected) selectBackgroundColor else normalBackgroundColor
+
+        binding.itemDefaultText.background = if (item.selected) selectBackgroundColor else null
 
     }
 }
