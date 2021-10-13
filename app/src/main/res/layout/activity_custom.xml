@@ -1,30 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="32dp">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <com.skydoves.powerspinner.PowerSpinnerView
-        android:id="@+id/spinnerView1"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="36dp"
-        android:layout_marginTop="12dp"
-        android:background="@drawable/edit_text_focused"
-        android:foreground="?attr/selectableItemBackground"
-        android:padding="10dp"
-        android:textColor="@color/black"
-        android:textColorHint="@color/black"
-        android:textSize="14sp"
-        app:spinner_arrow_gravity="end"
-        app:spinner_arrow_padding="8dp"
-        app:spinner_arrow_show="true"
-        app:spinner_divider_color="@color/black"
-        app:spinner_divider_show="true"
-        app:spinner_divider_size="0.4dp"
-        app:spinner_popup_animation="normal"
-        app:spinner_popup_background="@color/white"
-        app:spinner_popup_elevation="14dp"
-        tools:ignore="HardcodedText,UnusedAttribute" />
-</RelativeLayout>
+        android:layout_height="match_parent"
+        android:padding="32dp">
+
+        <com.skydoves.powerspinner.PowerSpinnerView
+            android:id="@+id/spinnerView1"
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/edit_text_focused"
+            android:foreground="?attr/selectableItemBackground"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:textSize="14sp"
+            app:spinner_arrow_gravity="end"
+            app:spinner_arrow_padding="8dp"
+            app:spinner_arrow_show="true"
+            app:spinner_divider_color="@color/black"
+            app:spinner_divider_show="true"
+            app:spinner_divider_size="0.4dp"
+            app:spinner_popup_animation="normal"
+            app:spinner_popup_background="@color/white"
+            app:spinner_popup_elevation="14dp"
+            tools:ignore="HardcodedText,UnusedAttribute" />
+    </RelativeLayout>
+</layout>
+

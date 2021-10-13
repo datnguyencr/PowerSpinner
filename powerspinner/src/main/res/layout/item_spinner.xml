@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/vLayout"
-    android:clickable="true"
-    android:focusable="true"
-    android:background="@drawable/normal_background_color">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/item_default_text"
+    <RelativeLayout
+        android:id="@+id/vLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:padding="8dp"
-        android:textSize="14sp"
-        tools:text="Power Spinner Item 1" />
-</RelativeLayout>
+        android:background="@drawable/normal_background_color"
+        android:clickable="true"
+        android:focusable="true">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/item_default_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:padding="8dp"
+            android:textSize="14sp"
+            tools:text="Power Spinner Item 1" />
+    </RelativeLayout>
+</layout>
+

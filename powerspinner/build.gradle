@@ -1,17 +1,15 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
-apply from: "$rootDir/dependencies.gradle"
 
 android {
-    compileSdkVersion versions.compileSdk
+    compileSdkVersion 30
     defaultConfig {
-        minSdkVersion versions.minSdk
-        targetSdkVersion versions.compileSdk
+        minSdkVersion 21
+        targetSdkVersion 30
     }
     buildFeatures {
-        viewBinding true
-        buildConfig false
+        dataBinding true
     }
 }
 

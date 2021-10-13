@@ -44,8 +44,7 @@ class PowerSpinnerView : AppCompatTextView, LifecycleObserver {
     var onItemSelected: ((Option) -> Unit)? = null
 
     /** Main body view for composing the Spinner popup. */
-    private val binding: LayoutBodyPowerSpinnerLibraryBinding =
-            LayoutBodyPowerSpinnerLibraryBinding.inflate(LayoutInflater.from(context), null, false)
+    private lateinit var binding: LayoutBodyPowerSpinnerLibraryBinding
 
     /** PopupWindow for creating the spinner. */
     private var spinnerWindow: PopupWindow? = null
@@ -229,27 +228,13 @@ class PowerSpinnerView : AppCompatTextView, LifecycleObserver {
             field?.lifecycle?.addObserver(this@PowerSpinnerView)
         }
 
-    init {
-        if (adapter is RecyclerView.Adapter<*>) {
-            getSpinnerRecyclerView().adapter = adapter as RecyclerView.Adapter<*>
-        }
-
-        this.setOnClickListener {
-            showOrDismiss()
-        }
-        if (this.gravity == Gravity.NO_GRAVITY) {
-            this.gravity = Gravity.CENTER_VERTICAL
-        }
-        val viewContext = context
-        if (lifecycleOwner == null && viewContext is LifecycleOwner) {
-            lifecycleOwner = viewContext
-        }
+    constructor(context: Context) : super(context){
+        setLayout(context, null)
     }
-
-    constructor(context: Context) : super(context)
 
     constructor(context: Context, attributeSet: AttributeSet) : super(context, attributeSet) {
         getAttrs(attributeSet)
+        setLayout(context, null)
     }
 
     constructor(context: Context, attributeSet: AttributeSet, defStyle: Int) : super(
@@ -258,6 +243,7 @@ class PowerSpinnerView : AppCompatTextView, LifecycleObserver {
             defStyle
     ) {
         getAttrs(attributeSet, defStyle)
+        setLayout(context, null)
     }
 
     private fun getAttrs(attributeSet: AttributeSet) {
@@ -437,6 +423,23 @@ class PowerSpinnerView : AppCompatTextView, LifecycleObserver {
                         )
                 )
             }
+        }
+    }
+    private fun setLayout(context: Context, attrs: AttributeSet?) {
+        binding = LayoutBodyPowerSpinnerLibraryBinding.inflate(LayoutInflater.from(context), null, false)
+        if (adapter is RecyclerView.Adapter<*>) {
+            getSpinnerRecyclerView().adapter = adapter as RecyclerView.Adapter<*>
+        }
+
+        this.setOnClickListener {
+            showOrDismiss()
+        }
+        if (this.gravity == Gravity.NO_GRAVITY) {
+            this.gravity = Gravity.CENTER_VERTICAL
+        }
+        val viewContext = context
+        if (lifecycleOwner == null && viewContext is LifecycleOwner) {
+            lifecycleOwner = viewContext
         }
     }
 
